@@ -1,0 +1,461 @@
+--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/prenercg/Documents/Working/week11-extended.txt
+  log type:  text
+ opened on:  24 Mar 2016, 13:42:07
+
+. 
+. // ==========================================================================
+. 
+. /* 
+> file name - week11-exteded.do
+> 
+> project name - SOC 4650/5650 - Intro to GISc - Spring 2016
+>                                                                               
+>    
+> purpose - Extended Example of Week 11 Concepts
+>                                                                               
+>          
+> created - 24 Mar 2016
+> 
+> updated - 24 Mar 2016
+>                                                                               
+>   
+> author - CHRIS
+> */                                                                            
+>   
+. 
+. // ==========================================================================
+.                                                                               
+>    
+. /* 
+> full description - 
+> This do-file is the master file for the extended example of concepts 
+> from Week 11
+> */
+. 
+. /* 
+> updates - 
+> none
+> */
+. 
+. // ==========================================================================
+. 
+. /* 
+> superordinates  - 
+> - a.xlsx - example dataset downloaded from GitHub
+> - b.xlsx - example dataset downloaded from GitHub
+> */
+. 
+. /* 
+> subordinates - 
+> This do-file calls the following three sub-files:
+>         - 1_cleanU.do
+>         - 2_cleanV.do
+>         - 3_createUV.do
+> */
+. 
+. // ==========================================================================
+. // ==========================================================================
+. // ==========================================================================
+. 
+. // 1. clean a.xlsx
+. do 1_cleanU.do
+
+. // ==========================================================================
+. 
+. // SOC 4650/5650 - Week 11 Extended Example - 1_cleanU.do
+. 
+. // ==========================================================================
+. 
+. // modified opening options
+. 
+. set more off
+
+. set linesize 80
+
+. 
+. // ==========================================================================
+. 
+. /* 
+> file name - 1_cleanU.do
+> 
+> project name - SOC 4650/5650 - Intro to GISc - Spring 2016
+>                                                                               
+>    
+> purpose - Extended Example of Week 11 Concepts
+>                                                                               
+>          
+> created - 24 Mar 2016
+> 
+> updated - 24 Mar 2016
+>                                                                               
+>   
+> author - CHRIS
+> */                                                                            
+>   
+. 
+. // ==========================================================================
+.                                                                               
+>    
+. /* 
+> full description - 
+> This do-file is the first of three subfiles for the extended example of
+> Week 11 concepts.
+> */
+. 
+. /* 
+> updates - 
+> none
+> */
+. 
+. // ==========================================================================
+. 
+. /* 
+> superordinates  - 
+> - u.xlsx - example dataset downloaded from GitHub
+> - week11-extended.do - master do-file that calls this sub-file
+> */
+. 
+. /* 
+> subordinates - 
+> none
+> */
+. 
+. // ==========================================================================
+. // ==========================================================================
+. // ==========================================================================
+. 
+. // 1. import data
+. import excel u.xlsx, sheet("Sheet1") firstrow
+
+. save u.dta, replace
+file u.dta saved
+
+. 
+. // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+. 
+. // 2. documentation
+. label data "u.dta - data for Week 11 extended example"
+
+. notes _dta: Created by Chris on 24 Mar 2016 for illustrating the use of ///
+>         master do-files for cleaning, merging, and exporting data
+
+. 
+. // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+. 
+. // 3. clean data
+. label variable id "identification number"
+
+. rename u uScore 
+
+. label variable uScore "score of instrument u"
+
+. 
+. notes uScore: variable renamed from original name 'u' (CHRIS; 24 Mar 2016)
+
+. 
+. // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+. 
+. // 4. save data
+. save u.dta, replace
+file u.dta saved
+
+. 
+. // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+. 
+. // 5. clear data from memory
+. clear
+
+. 
+. // ==========================================================================
+. // ==========================================================================
+. // ==========================================================================
+. 
+. // end
+. 
+end of do-file
+
+. 
+. // 2. clean b.xlsx
+. do 2_cleanV.do
+
+. // ==========================================================================
+. 
+. // SOC 4650/5650 - Week 11 Extended Example - 2_cleanV.do
+. 
+. // ==========================================================================
+. 
+. // modified opening options
+. 
+. set more off
+
+. set linesize 80
+
+. 
+. // ==========================================================================
+. 
+. /* 
+> file name - 2_cleanV.do
+> 
+> project name - SOC 4650/5650 - Intro to GISc - Spring 2016
+>                                                                               
+>    
+> purpose - Extended Example of Week 11 Concepts
+>                                                                               
+>          
+> created - 24 Mar 2016
+> 
+> updated - 24 Mar 2016
+>                                                                               
+>   
+> author - CHRIS
+> */                                                                            
+>   
+. 
+. // ==========================================================================
+.                                                                               
+>    
+. /* 
+> full description - 
+> This do-file is the second of three subfiles for the extended example of
+> Week 11 concepts.
+> */
+. 
+. /* 
+> updates - 
+> none
+> */
+. 
+. // ==========================================================================
+. 
+. /* 
+> superordinates  - 
+> - v.xlsx - example dataset downloaded from GitHub
+> - week11-extended.do - master do-file that calls this sub-file
+> */
+. 
+. /* 
+> subordinates - 
+> none
+> */
+. 
+. // ==========================================================================
+. // ==========================================================================
+. // ==========================================================================
+. 
+. // 1. import data
+. import excel v.xlsx, sheet("Sheet1") firstrow
+
+. save v.dta, replace
+file v.dta saved
+
+. 
+. // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+. 
+. // 2. documentation
+. label data "v.dta - data for Week 11 extended example"
+
+. notes _dta: Created by Chris on 24 Mar 2016 for illustrating the use of ///
+>         master do-files for cleaning, merging, and exporting data
+
+. 
+. // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+. 
+. // 3. clean data
+. label variable id "identification number"
+
+. rename v vScore 
+
+. label variable vScore "score of instrument v"
+
+. 
+. notes vScore: variable renamed from original name 'v' (CHRIS; 24 Mar 2016)
+
+. 
+. // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+. 
+. // 4. save data
+. save v.dta, replace
+file v.dta saved
+
+. 
+. // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+. 
+. // 5. clear data from memory
+. clear
+
+. 
+. // ==========================================================================
+. // ==========================================================================
+. // ==========================================================================
+. 
+. // end
+. 
+end of do-file
+
+. 
+. // 3. merge and export data
+. do 3_createUV.do
+
+. // ==========================================================================
+. 
+. // SOC 4650/5650 - Week 11 Extended Example - 1_createUV.do
+. 
+. // ==========================================================================
+. 
+. // modified opening options
+. 
+. set more off
+
+. set linesize 80
+
+. 
+. // ==========================================================================
+. 
+. /* 
+> file name - 1_cleanV.do
+> 
+> project name - SOC 4650/5650 - Intro to GISc - Spring 2016
+>                                                                               
+>    
+> purpose - Extended Example of Week 11 Concepts
+>                                                                               
+>          
+> created - 24 Mar 2016
+> 
+> updated - 24 Mar 2016
+>                                                                               
+>   
+> author - CHRIS
+> */                                                                            
+>   
+. 
+. // ==========================================================================
+.                                                                               
+>    
+. /* 
+> full description - 
+> This do-file is the third of three subfiles for the extended example of
+> Week 11 concepts.
+> */
+. 
+. /* 
+> updates - 
+> none
+> */
+. 
+. // ==========================================================================
+. 
+. /* 
+> superordinates  - 
+> - u.dta - example data created by 1_cleanU
+> - v.dta - example data created by 2_cleanV
+> - week11-extended.do - master do-file that calls this sub-file
+> */
+. 
+. /* 
+> subordinates - 
+> none
+> */
+. 
+. // ==========================================================================
+. // ==========================================================================
+. // ==========================================================================
+. 
+. // 1. open data that will become master data
+. use u.dta
+(u.dta - data for Week 11 extended example)
+
+. 
+. // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+. 
+. // 2. merge data
+. merge 1:1 id using v.dta
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                             0
+    matched                                10  (_merge==3)
+    -----------------------------------------
+
+. 
+. // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+. 
+. // 3. check merge
+. tabulate _merge
+
+                 _merge |      Freq.     Percent        Cum.
+------------------------+-----------------------------------
+            matched (3) |         10      100.00      100.00
+------------------------+-----------------------------------
+                  Total |         10      100.00
+
+. describe
+
+Contains data from u.dta
+  obs:            10                          u.dta - data for Week 11
+                                                extended example
+ vars:             4                          24 Mar 2016 13:42
+ size:           180                          (_dta has notes)
+--------------------------------------------------------------------------------
+              storage   display    value
+variable name   type    format     label      variable label
+--------------------------------------------------------------------------------
+id              byte    %10.0g                identification number
+uScore          double  %10.0g              * score of instrument u
+vScore          double  %10.0g              * score of instrument v
+_merge          byte    %23.0g     _merge     
+                                            * indicated variables have notes
+--------------------------------------------------------------------------------
+Sorted by: id
+     Note: Dataset has changed since last saved.
+
+. 
+. // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+. 
+. // 4. drop merge variable to eliminate conflicts with ArcGIS
+. drop _merge
+
+. 
+. // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+. 
+. // 5. save data
+. save uvFull.dta, replace
+file uvFull.dta saved
+
+. 
+. // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+. 
+. // 6. export data in excel format
+. export excel uvFull.xlsx, firstrow(variables) replace
+file uvFull.xlsx saved
+
+. 
+. // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+. 
+. // 7. clear data from memory
+. clear
+
+. 
+. // ==========================================================================
+. // ==========================================================================
+. // ==========================================================================
+. 
+. // end
+. 
+end of do-file
+
+. 
+. // ==========================================================================
+. // ==========================================================================
+. // ==========================================================================
+. 
+. // standard closing options
+. 
+. log close _all
+      name:  <unnamed>
+       log:  /Users/prenercg/Documents/Working/week11-extended.txt
+  log type:  text
+ closed on:  24 Mar 2016, 13:42:07
+--------------------------------------------------------------------------------

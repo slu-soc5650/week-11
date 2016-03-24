@@ -1,0 +1,172 @@
+--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/prenercg/Documents/Working/lecture11.txt
+  log type:  text
+ opened on:  24 Mar 2016, 13:19:41
+
+. 
+. // ==========================================================================
+. 
+. /* 
+> file name - lecture11.do
+> 
+> project name - SOC 4650/5650 - Intro to GISc - Spring 2016
+>                                                                               
+>    
+> purpose - Replication of Lecture 11 Merge Example
+>                                                                               
+>          
+> created - 24 Mar 2016
+> 
+> updated - 24 Mar 2016
+>                                                                               
+>   
+> author - CHRIS
+> */                                                                            
+>   
+. 
+. // ==========================================================================
+.                                                                               
+>    
+. /* 
+> full description - 
+> This do-file replicates the lecture example for merging data
+> */
+. 
+. /* 
+> updates - 
+> 
+> */
+. 
+. // ==========================================================================
+. 
+. /* 
+> superordinates  - 
+> - a.dta - example dataset downloaded from Blackboard
+> - b.dta - example dataset downloaded from Blackboard
+> */
+. 
+. /* 
+> subordinates - 
+> 
+> */
+. 
+. // ==========================================================================
+. // ==========================================================================
+. // ==========================================================================
+. 
+. // 1. initial exploration of first dataset
+. 
+. use a.dta
+
+. describe
+
+Contains data from a.dta
+  obs:            10                          
+ vars:             2                          18 Nov 2015 20:31
+ size:           120                          
+--------------------------------------------------------------------------------
+              storage   display    value
+variable name   type    format     label      variable label
+--------------------------------------------------------------------------------
+id              float   %9.0g                 
+u               double  %10.0g                
+--------------------------------------------------------------------------------
+Sorted by: 
+
+. clear
+
+. 
+. // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+. 
+. // 2. initial exploration of second dataset
+. 
+. use b.dta
+
+. describe
+
+Contains data from b.dta
+  obs:            10                          
+ vars:             2                          23 Mar 2016 15:43
+ size:           120                          
+--------------------------------------------------------------------------------
+              storage   display    value
+variable name   type    format     label      variable label
+--------------------------------------------------------------------------------
+id              float   %9.0g                 
+v               double  %10.0g                
+--------------------------------------------------------------------------------
+Sorted by: 
+
+. clear
+
+. 
+. // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+. 
+. // 3. re-open first dataset, will be master
+. 
+. use a.dta
+
+. 
+. // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+. 
+. // 4. merge data
+. merge 1:1 id using b.dta
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                             0
+    matched                                10  (_merge==3)
+    -----------------------------------------
+
+. 
+. // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+. 
+. // 5. check merge
+. tabulate _merge
+
+                 _merge |      Freq.     Percent        Cum.
+------------------------+-----------------------------------
+            matched (3) |         10      100.00      100.00
+------------------------+-----------------------------------
+                  Total |         10      100.00
+
+. describe
+
+Contains data from a.dta
+  obs:            10                          
+ vars:             4                          18 Nov 2015 20:31
+ size:           210                          
+--------------------------------------------------------------------------------
+              storage   display    value
+variable name   type    format     label      variable label
+--------------------------------------------------------------------------------
+id              float   %9.0g                 
+u               double  %10.0g                
+v               double  %10.0g                
+_merge          byte    %23.0g     _merge     
+--------------------------------------------------------------------------------
+Sorted by: id
+     Note: Dataset has changed since last saved.
+
+. 
+. // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+. 
+. // 6. save merged data
+. save abFull.dta, replace
+(note: file abFull.dta not found)
+file abFull.dta saved
+
+. 
+. // ==========================================================================
+. // ==========================================================================
+. // ==========================================================================
+. 
+. // standard closing options
+. 
+. log close _all
+      name:  <unnamed>
+       log:  /Users/prenercg/Documents/Working/lecture11.txt
+  log type:  text
+ closed on:  24 Mar 2016, 13:19:41
+--------------------------------------------------------------------------------
