@@ -1,10 +1,10 @@
-# `week-10`
+# `week-11`
 
 This repository contains files for:
 
 -   `ArcGIS/` - ArcGIS quick reference
--   `Lab/` - lab-06 directions and replication
--   `Slides` - lecture slides
+-   `Lab/` - lab-11 directions and replication
+-   `Slides/` - lecture slides
 -   `LICENSE.md`
 -   `README.md`
 -   `.gitignore`
