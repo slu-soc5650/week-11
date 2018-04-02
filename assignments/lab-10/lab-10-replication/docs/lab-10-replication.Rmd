@@ -1,0 +1,76 @@
+---
+title: "Lab 10 Replication Notebook"
+author: "Christopher Prener, Ph.D."
+date: '(`r format(Sys.time(), "%B %d, %Y")`)'
+output: 
+  github_document: default
+  html_notebook: default 
+---
+
+## Introduction
+This is the replication notebook for Lab 10 from the course SOC 4650/5650: Introduction to GISc.
+
+## Load Dependencies
+The following code loads the package dependencies for our analysis:
+
+```{r package-load}
+# tidyverse packages
+library(dplyr)   # data wrangling
+library(readr)   # work with csv files
+
+# other packages
+library(here)    # file path management
+library(sf)      # spatial data tools
+```
+
+## Load Data
+We'll use data distributed with the `lecture-11` repository:
+
+```{r load-data}
+permits15 <- read_csv(here("data", "demoPermits", "permits2015.csv"))
+permits16 <- read_csv(here("data", "demoPermits", "permits2016.csv"))
+city <- st_read(here("data", "MO_BOUNDARY_Counties", "St_Louis_City.shp"), 
+                    stringsAsFactors = FALSE)
+county <- st_read(here("data", "MO_BOUNDARY_Counties", "St_Louis_County.shp"), 
+                    stringsAsFactors = FALSE)
+```
+
+## Part 2
+## Question 1
+The following code uses the `rbind()` function from `base R` to combine our two shapefiles mapping the county boundaries for St. Louis City and County respectively:
+
+```{r bind-counties}
+counties <- rbind(city, county)
+```
+
+We can check to make sure these were bound appropriately by using the `glimpse()` function from `dplyr`:
+
+```{r check-county-data}
+glimpse(counties)
+```
+
+After binding them and ensuring that the data matched, we will export them:
+
+```{r export-county-data}
+dir.create(here("data", "cleanData"))
+st_write(counties, here("data", "cleanData", "StLouis_Regional_Counties.shp"), delete_dsn = TRUE)
+```
+
+### Question 2
+The following code uses the `bind_rows()` function from `dplyr` to combine our two data tables containing demolition permit data:
+
+```{r bind-demo-permits}
+permits <- bind_rows(permits15, permits16)
+```
+
+We can check to make sure these were bound appropriately by using the `glimpse()` function from `dplyr`:
+
+```{r check-demo-data}
+glimpse(permits)
+```
+
+After binding them and ensuring that the data matched, we will export them:
+
+```{r export-demo-data}
+write_csv(permits, here("data", "cleanData", "demoPermits.csv"))
+```
